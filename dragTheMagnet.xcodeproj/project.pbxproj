@@ -133,6 +133,9 @@
 		63222EF316E461E000AA1AB0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63222EF216E461E000AA1AB0 /* AppDelegate.m */; };
 		63222EF616E461E000AA1AB0 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63222EF516E461E000AA1AB0 /* HelloWorldLayer.m */; };
 		63222EF916E461E000AA1AB0 /* IntroLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 63222EF816E461E000AA1AB0 /* IntroLayer.m */; };
+		63FFF4FE16F097F400124496 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 63FFF4FD16F097F400124496 /* blocks.png */; };
+		63FFF50016F097FB00124496 /* blocks-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 63FFF4FF16F097FB00124496 /* blocks-hd.png */; };
+		63FFF50216F09FB800124496 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 63FFF50116F09FB800124496 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -398,6 +401,9 @@
 		63222EF516E461E000AA1AB0 /* HelloWorldLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HelloWorldLayer.m; sourceTree = "<group>"; };
 		63222EF716E461E000AA1AB0 /* IntroLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntroLayer.h; sourceTree = "<group>"; };
 		63222EF816E461E000AA1AB0 /* IntroLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntroLayer.m; sourceTree = "<group>"; };
+		63FFF4FD16F097F400124496 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blocks.png; sourceTree = "<group>"; };
+		63FFF4FF16F097FB00124496 /* blocks-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blocks-hd.png"; sourceTree = "<group>"; };
+		63FFF50116F09FB800124496 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -472,7 +478,10 @@
 		63222D7A16E461DE00AA1AB0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				63FFF4FF16F097FB00124496 /* blocks-hd.png */,
+				63FFF4FD16F097F400124496 /* blocks.png */,
 				63222D7B16E461DE00AA1AB0 /* Default.png */,
+				63FFF50116F09FB800124496 /* Default-568h@2x.png */,
 				63222D7D16E461DE00AA1AB0 /* Default-Landscape~ipad.png */,
 				63222D7F16E461DE00AA1AB0 /* fps_images.png */,
 				63222D8116E461DE00AA1AB0 /* fps_images-hd.png */,
@@ -859,6 +868,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = 63222D5F16E461DD00AA1AB0 /* Build configuration list for PBXProject "dragTheMagnet" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -895,6 +905,9 @@
 				63222D9016E461DE00AA1AB0 /* Icon@2x.png in Resources */,
 				63222D9316E461DE00AA1AB0 /* iTunesArtwork in Resources */,
 				63222ED116E461E000AA1AB0 /* ChangeLog in Resources */,
+				63FFF4FE16F097F400124496 /* blocks.png in Resources */,
+				63FFF50016F097FB00124496 /* blocks-hd.png in Resources */,
+				63FFF50216F09FB800124496 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1112,6 +1125,7 @@
 				63222EFE16E461E100AA1AB0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
