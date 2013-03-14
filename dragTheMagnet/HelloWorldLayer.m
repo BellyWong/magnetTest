@@ -50,12 +50,40 @@
         
         self.isTouchEnabled = YES;
         isBlockTouched = NO;
+        [self schedule:@selector(gameLogic:) interval:2/60 ];
 
 	}
 	return self;
 }
 
+-(void)gameLogic:(ccTime)dt {
+    now = dt;
+    block.position = ccp(block.position.x+blockMovement.x,block.position.y+blockMovement.y);
+    if (block.position.x > 288 || block.position.x  < 32) {
+        blockMovement.x = -blockMovement.x;
+        blockMovement.x /= 2;
+    }
+    if (block.position.x > 288) {
+        block.position = ccp(288,block.position.y);
+    }
+    if (block.position.x < 32) {
+        block.position = ccp(32,block.position.y);
+    }
+    
+    if (block.position.y > 448 || block.position.y < 32) {
+        blockMovement.y = -blockMovement.y;
+        blockMovement.y /= 2;
+    }
+    if (block.position.y > 448) {
+        block.position = ccp(block.position.x, 448);
+    }
+    if (block.position.y < 32) {
+        block.position = ccp(block.position.x, 32);
+    }
+}
+
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"touch begin");
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:[touch view]];
     CGPoint convertedLocation = [[CCDirector sharedDirector]convertToGL:location];
@@ -69,35 +97,47 @@
     } else {
         isBlockTouched = YES;
         startLocation = ccp(convertedLocation.x,convertedLocation.y);
+        startTime = now;
+        NSLog(@"startTime = %f",startTime);
     }
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (isBlockTouched) {
-        UITouch *touch = [touches anyObject];
-        CGPoint location = [touch locationInView:[touch view]];
-        CGPoint convertedLocation = [[CCDirector sharedDirector] convertToGL:location];
+    if (!isBlockTouched) return ;
+    
+    //NSLog(@"touch move");
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView:[touch view]];
+    CGPoint convertedLocation = [[CCDirector sharedDirector] convertToGL:location];
+    
+    CGPoint newLocation = ccp(convertedLocation.x,convertedLocation.y);
+    block.position = newLocation;
         
-        
-        CGPoint newLocation = ccp(convertedLocation.x,convertedLocation.y);
-        block.position = newLocation;
-        
-    }
 }
 
 -(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (isBlockTouched) {
-        UITouch *touch = [touches anyObject];
-        CGPoint location = [touch locationInView:[touch view]];
-        CGPoint convertedLocation = [[CCDirector sharedDirector] convertToGL:location];
+    if (!isBlockTouched) return ;
+    
+    NSLog(@"touch end");
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView:[touch view]];
+    CGPoint convertedLocation = [[CCDirector sharedDirector] convertToGL:location];
         
-        endLocation = ccp(convertedLocation.x,convertedLocation.y);
-        
-        id move = [CCMoveTo actionWithDuration:2 position:ccp(0,0)];
-        [block runAction:move];
-        
+    endLocation = ccp(convertedLocation.x,convertedLocation.y);
+    endTime = now;
+    NSLog(@"endTime = %f",endTime);
+    
+    CGPoint deltaDistance = ccp(endLocation.x - startLocation.x , endLocation.y - startLocation.y);
+    int deltaTime = (endTime - startTime)*100000;
+    if (deltaTime == 0) {
+        deltaTime = 1;
     }
-
+    else if (deltaTime < 0 ) {
+        deltaTime = -deltaTime;
+    }
+    NSLog(@"deltaDistance x= %f, y= %f",deltaDistance.x,deltaDistance.y);
+    NSLog(@"deltaTime = %d",deltaTime);
+    blockMovement = ccp(deltaDistance.x / deltaTime, deltaDistance.y / deltaTime);
 }
 
 // on "dealloc" you need to release all your retained objects

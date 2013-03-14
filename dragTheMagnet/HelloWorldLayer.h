@@ -17,7 +17,8 @@
 {
     CCNode *block;
     BOOL isBlockTouched;
-    CGPoint startLocation,endLocation;
+    CGPoint startLocation,endLocation, blockMovement;
+    ccTime startTime, endTime, now;
 }
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
