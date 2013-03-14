@@ -44,12 +44,60 @@
 		// ask director for the window size
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
-        CCSprite *block = [CCSprite spriteWithFile:@"blocks.png"];
+        block = [CCSprite spriteWithFile:@"blocks.png"];
         block.position = ccp(size.width /2 , size.height/2);
         [self addChild:block z:2];
+        
+        self.isTouchEnabled = YES;
+        isBlockTouched = NO;
 
 	}
 	return self;
+}
+
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView:[touch view]];
+    CGPoint convertedLocation = [[CCDirector sharedDirector]convertToGL:location];
+    
+    CGFloat halfWidth = block.contentSize.width / 2.0;
+    CGFloat halfHeight = block.contentSize.height / 2.0;
+    
+    if (convertedLocation.x > (block.position.x + halfWidth) || convertedLocation.x < (block.position.x - halfWidth) ||
+        convertedLocation.y > (block.position.y + halfHeight) || convertedLocation.y < (block.position.y - halfHeight))  {
+        isBlockTouched = NO;
+    } else {
+        isBlockTouched = YES;
+        startLocation = ccp(convertedLocation.x,convertedLocation.y);
+    }
+}
+
+-(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (isBlockTouched) {
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInView:[touch view]];
+        CGPoint convertedLocation = [[CCDirector sharedDirector] convertToGL:location];
+        
+        
+        CGPoint newLocation = ccp(convertedLocation.x,convertedLocation.y);
+        block.position = newLocation;
+        
+    }
+}
+
+-(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (isBlockTouched) {
+        UITouch *touch = [touches anyObject];
+        CGPoint location = [touch locationInView:[touch view]];
+        CGPoint convertedLocation = [[CCDirector sharedDirector] convertToGL:location];
+        
+        endLocation = ccp(convertedLocation.x,convertedLocation.y);
+        
+        id move = [CCMoveTo actionWithDuration:2 position:ccp(0,0)];
+        [block runAction:move];
+        
+    }
+
 }
 
 // on "dealloc" you need to release all your retained objects
@@ -63,17 +111,5 @@
 	[super dealloc];
 }
 
-#pragma mark GameKit delegate
 
--(void) achievementViewControllerDidFinish:(GKAchievementViewController *)viewController
-{
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
-}
-
--(void) leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController
-{
-	AppController *app = (AppController*) [[UIApplication sharedApplication] delegate];
-	[[app navController] dismissModalViewControllerAnimated:YES];
-}
 @end
