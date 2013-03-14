@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		630D268A16F1AE0E0094ED06 /* r1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 630D268816F1AE0E0094ED06 /* r1-hd.png */; };
+		630D268B16F1AE0E0094ED06 /* r1.png in Resources */ = {isa = PBXBuildFile; fileRef = 630D268916F1AE0E0094ED06 /* r1.png */; };
 		63222D6816E461DE00AA1AB0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63222D6716E461DE00AA1AB0 /* QuartzCore.framework */; };
 		63222D6A16E461DE00AA1AB0 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63222D6916E461DE00AA1AB0 /* OpenGLES.framework */; };
 		63222D6C16E461DE00AA1AB0 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63222D6B16E461DE00AA1AB0 /* OpenAL.framework */; };
@@ -139,6 +141,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		630D268816F1AE0E0094ED06 /* r1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "r1-hd.png"; sourceTree = "<group>"; };
+		630D268916F1AE0E0094ED06 /* r1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = r1.png; sourceTree = "<group>"; };
 		63222D6416E461DE00AA1AB0 /* dragTheMagnet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dragTheMagnet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63222D6716E461DE00AA1AB0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		63222D6916E461DE00AA1AB0 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -478,6 +482,8 @@
 		63222D7A16E461DE00AA1AB0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				630D268816F1AE0E0094ED06 /* r1-hd.png */,
+				630D268916F1AE0E0094ED06 /* r1.png */,
 				63FFF4FF16F097FB00124496 /* blocks-hd.png */,
 				63FFF4FD16F097F400124496 /* blocks.png */,
 				63222D7B16E461DE00AA1AB0 /* Default.png */,
@@ -908,6 +914,8 @@
 				63FFF4FE16F097F400124496 /* blocks.png in Resources */,
 				63FFF50016F097FB00124496 /* blocks-hd.png in Resources */,
 				63FFF50216F09FB800124496 /* Default-568h@2x.png in Resources */,
+				630D268A16F1AE0E0094ED06 /* r1-hd.png in Resources */,
+				630D268B16F1AE0E0094ED06 /* r1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

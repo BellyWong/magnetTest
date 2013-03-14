@@ -15,8 +15,8 @@
 // HelloWorldLayer
 @interface HelloWorldLayer : CCLayer
 {
-    CCNode *block;
-    BOOL isBlockTouched;
+    CCNode *block, *magnet;
+    BOOL isBlockTouched, onMagnetField;
     CGPoint startLocation,endLocation, blockMovement;
     ccTime startTime, endTime, now;
 }

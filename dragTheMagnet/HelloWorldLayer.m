@@ -45,12 +45,17 @@
 		CGSize size = [[CCDirector sharedDirector] winSize];
         
         block = [CCSprite spriteWithFile:@"blocks.png"];
-        block.position = ccp(size.width /2 , size.height/2);
+        block.position = ccp(size.width /2 , 32);
         [self addChild:block z:2];
+        
+        magnet = [CCSprite spriteWithFile:@"r1.png"];
+        magnet.position = ccp(size.width /2 , 400);
+        [self addChild:magnet z:1];
         
         self.isTouchEnabled = YES;
         isBlockTouched = NO;
-        [self schedule:@selector(gameLogic:) interval:2/60 ];
+        onMagnetField = NO;
+        [self schedule:@selector(gameLogic:) interval:10/60 ];
 
 	}
 	return self;
@@ -58,6 +63,32 @@
 
 -(void)gameLogic:(ccTime)dt {
     now = dt;
+    CGFloat forceWidth = magnet.contentSize.width;
+    CGFloat forceHeight = magnet.contentSize.height;
+    if (block.position.x <= (magnet.position.x + forceWidth) && block.position.x >= (magnet.position.x - forceWidth) &&
+        block.position.y <= (magnet.position.y + forceHeight) && block.position.y >= (magnet.position.y - forceHeight))  {
+        onMagnetField = YES;
+    }
+    else {
+        onMagnetField = NO;
+    }
+    
+    
+    if (onMagnetField) {
+        CGPoint deltaDistance = ccp(magnet.position.x - block.position.x , magnet.position.y - block.position.y);
+        int deltaTime = 2;
+//        int deltaTime = (endTime - startTime)*100000;
+//        if (deltaTime == 0) {
+//            deltaTime = 1;
+//        }
+//        else if (deltaTime < 0 ) {
+//            deltaTime = -deltaTime;
+//        }
+//        NSLog(@"deltaDistance x= %f, y= %f",deltaDistance.x,deltaDistance.y);
+//        NSLog(@"deltaTime = %d",deltaTime);
+        blockMovement = ccp(deltaDistance.x / deltaTime, deltaDistance.y / deltaTime);
+    }
+    
     block.position = ccp(block.position.x+blockMovement.x,block.position.y+blockMovement.y);
     if (block.position.x > 288 || block.position.x  < 32) {
         blockMovement.x = -blockMovement.x;
@@ -84,6 +115,8 @@
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     NSLog(@"touch begin");
+    onMagnetField = NO;
+    blockMovement = ccp(0,0);
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:[touch view]];
     CGPoint convertedLocation = [[CCDirector sharedDirector]convertToGL:location];
@@ -104,7 +137,7 @@
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     if (!isBlockTouched) return ;
-    
+    blockMovement = ccp(0,0);
     //NSLog(@"touch move");
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInView:[touch view]];
